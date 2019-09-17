@@ -6,3 +6,4 @@
 /mezzio-mkdoc-theme/
 /phpunit.xml
 /vendor/
+*.phtml
