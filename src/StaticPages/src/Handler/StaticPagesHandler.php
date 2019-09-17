@@ -10,6 +10,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Zend\Diactoros\Response\HtmlResponse;
+use Zend\Expressive\Exception\InvalidArgumentException;
 use Zend\Expressive\Router\RouteResult;
 use Zend\Expressive\Router\RouterInterface;
 use Zend\Expressive\Template\TemplateRendererInterface;
@@ -48,6 +49,11 @@ class StaticPagesHandler implements RequestHandlerInterface
     {
         /** @var RouteResult $routeName */
         $routeName = ($request->getAttribute(RouteResult::class))->getMatchedRouteName();
+
+        if ($routeName === false) {
+            throw new InvalidArgumentException('Route has no name set');
+        }
+
         $templateName = sprintf('%s::%s', self::TEMPLATE_NS, substr($routeName, strrpos($routeName, '.') + 1));
 
         return new HtmlResponse($this->template->render($templateName));

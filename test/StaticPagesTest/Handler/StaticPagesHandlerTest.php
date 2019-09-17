@@ -11,6 +11,7 @@ use Prophecy\Argument;
 use Psr\Http\Message\ServerRequestInterface;
 use StaticPages\Handler\StaticPagesHandler;
 use Zend\Diactoros\Response\HtmlResponse;
+use Zend\Expressive\Exception\InvalidArgumentException;
 use Zend\Expressive\Router\RouteResult;
 use Zend\Expressive\Router\RouterInterface;
 use Zend\Expressive\Template\TemplateRendererInterface;
@@ -53,5 +54,32 @@ class StaticPagesHandlerTest extends TestCase
         $response = $page->handle($request->reveal());
 
         $this->assertInstanceOf(HtmlResponse::class, $response);
+    }
+
+    public function testThrowsExceptionWhenRequestedRouteHasNoName()
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage("Route has no name set");
+
+        $renderer = $this->prophesize(TemplateRendererInterface::class);
+        $renderer
+            ->render('static-pages::terms')
+            ->willReturn('');
+
+        $page = new StaticPagesHandler(
+            $this->router->reveal(),
+            $renderer->reveal()
+        );
+
+        /** @var RouteResult|ObjectProphecy $routerResult */
+        $routerResult = $this->prophesize(RouteResult::class);
+        $routerResult->getMatchedRouteName()
+            ->willReturn(false);
+
+        $request = $this->prophesize(ServerRequestInterface::class);
+        $request
+            ->getAttribute(RouteResult::class)
+            ->willReturn($routerResult);
+        $page->handle($request->reveal());
     }
 }
