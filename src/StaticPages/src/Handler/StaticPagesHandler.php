@@ -47,7 +47,7 @@ class StaticPagesHandler implements RequestHandlerInterface
     public function handle(ServerRequestInterface $request) : ResponseInterface
     {
         /** @var RouteResult $routeName */
-        $routeName = ($request->getAttribute("Zend\Expressive\Router\RouteResult"))->getMatchedRouteName();
+        $routeName = ($request->getAttribute(RouteResult::class))->getMatchedRouteName();
         $templateName = sprintf('%s::%s', self::TEMPLATE_NS, substr($routeName, strrpos($routeName, '.') + 1));
 
         return new HtmlResponse($this->template->render($templateName));
