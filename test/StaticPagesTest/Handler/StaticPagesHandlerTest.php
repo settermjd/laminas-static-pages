@@ -82,4 +82,57 @@ class StaticPagesHandlerTest extends TestCase
             ->willReturn($routerResult);
         $page->handle($request->reveal());
     }
+
+    /**
+     * @dataProvider invalidRouteNameDataProvider
+     */
+    public function testThrowsExceptionWhenTheNameOfTheRequestedRouteDoesNotMatchTheExpectedFormat(string $routeName)
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage("Route's name does not match the expected format.");
+
+        $renderer = $this->prophesize(TemplateRendererInterface::class);
+        $renderer
+            ->render('static-pages::terms')
+            ->willReturn('');
+
+        $router = $this->prophesize(RouterInterface::class);
+
+        $page = new StaticPagesHandler(
+            $router->reveal(),
+            $renderer->reveal()
+        );
+
+        /** @var RouteResult|ObjectProphecy $routerResult */
+        $routerResult = $this->prophesize(RouteResult::class);
+        $routerResult->getMatchedRouteName()
+            ->willReturn($routeName);
+
+        $request = $this->prophesize(ServerRequestInterface::class);
+        $request
+            ->getAttribute(RouteResult::class)
+            ->willReturn($routerResult);
+        $page->handle($request->reveal());
+    }
+
+    public function invalidRouteNameDataProvider()
+    {
+        return [
+            [
+                'terms'
+            ],
+            [
+                'shonky.terms'
+            ],
+            [
+                'static.'
+            ],
+            [
+                '.terms'
+            ],
+            [
+                'static_terms'
+            ],
+        ];
+    }
 }
