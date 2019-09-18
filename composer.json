@@ -1,5 +1,5 @@
 {
-    "name": "zfmastery/ze-static-pages",
+    "name": "settermjd/zend-expressive-static-pages",
     "description": "An easy, almost painless, way to render static pages in Zend Expressive applications.",
     "type": "library",
     "license": "BSD-3-Clause",
@@ -8,13 +8,11 @@
         "middleware",
         "psr",
         "psr-15",
-        "static pages",
-        "static content"
+        "static content",
+        "static pages"
     ],
     "require": {
-        "php": "^7.3",
-        "ext-meminfo": "*",
-        "monolog/monolog": "^2.0",
+        "php": "^7.1",
         "zendframework/zend-component-installer": "^2.1.1",
         "zendframework/zend-config-aggregator": "^1.0",
         "zendframework/zend-diactoros": "^1.7.1 || ^2.0",
@@ -27,7 +25,6 @@
     },
     "require-dev": {
         "filp/whoops": "^2.1.12",
-        "maximebf/debugbar": ">=1.0.0",
         "phpunit/phpunit": "^7.0.1",
         "roave/security-advisories": "dev-master",
         "squizlabs/php_codesniffer": "^2.9.1",
