@@ -1,39 +1,70 @@
 # Zend Expressive Static Pages Module
 
-An easy, almost painless, way to render static pages in Zend Expressive applications. 
+An, almost, painless way to render static pages in Zend Expressive applications.
+
+**Note:** This module **does not** support (at least not yet) Zend Framework (MVC) applications.
+
+The intent of this package is to avoid the necessity to create handlers and handler factories just to render static content.
+It was motivated by various projects that I've worked on, where that seemed to be the case, at least at the time.
+That approach never made sense to me, so that's that motivated me to scratch my own itch.
 
 ## Getting Started
 
-To install the package, you have two choices:
+To install the package, run `composer require settermjd/zend-expressive-static-pages`.
 
-1. Use Composer
+If you want to automate the enabling of the module when running `composer require/install/update`, then your project needs to use [zendframework/zend-component-installer].
+If it does, when the package is installed you'll be asked if you want to enable its ConfigProvider.
+Answer with `Y` and the package will be ready to use.
 
-This is currently a proof of concept, so this section is here as a placeholder.
+If you don't use `zend-component-installer`, or for some reason or other can't, then ensure that `\StaticPages\ConfigProvider::class,` is in the `ConfigAggregator` list in `config/config.php`, as in the example below.
 
-2. Use Git
-
-```console
-# First clone the repository to the src directory of your Zend Expressive application. 
-# I recommend calling it StaticPages, but you don't have to.
-git clone https://github.com/zfmastery/ze-static-page src/StaticPages
-
-# Then, use Zend Expressive Tooling to enable the module
-./vendor/bin/expressive module:register StaticPages # or whatever you called it when you cloned the module
+```php
+$aggregator = new ConfigAggregator([
+    \StaticPages\ConfigProvider::class,
+]);
 ```
 
 With the package installed, you now need to do two further steps:
 
-1. Create the relevant static templates inside `src/StaticPages/templates/static-pages`
-2. Create relevant routes in config/routes.php
+1. Configure the template path
+2. Create routes
+3. Create template files
 
-### Programmatic Pipeline Example
+### Configure The Template Path
 
-Create a new route to render the product's disclosure information.
-Note the third parameter, the route's name. This is important.
-It has to start with `static.` and end with the applicable template's name, minus the `.phtml` file extension.
-As such, assuming that you're using Zend-View as your template layer, this route will attempt to render the contents of: `src/StaticPages/templates/static-pages/disclosure.phtml`. 
-If the template doesn't exist, a 404 Not Found page will be rendered. 
+To configure the template path, ensure that in your template paths list, there's one with the key `static-pages`, as in the example below.
 
 ```php
-$app->get('/disclosure', StaticPages\Action\StaticPagesAction::class, 'static.disclosure');
+public function getTemplates() : array
+{
+    return [
+        'paths' => [
+            'static-pages' => [__DIR__ . '/../templates/static-pages'],
+        ],
+    ];
+}
 ```
+
+### Create Routes
+
+To create a route for a static page, in your routing table, add one or more named routes where:
+
+1. The route’s handler is `StaticPagesHandler::class`
+2. The name follows the convention: `static.<template_file_name_minus_file_extension>`.
+
+Let's assume that we are adding a route for a privacy page and that the template file which will be rendered is `privacy.phtml`.
+In that case we'd add the following to `config/routes.php`:
+
+```php
+$app->get('/privacy', StaticPagesHandler::class, 'static.privacy');
+```
+
+### Create Template Files
+
+The file can contain whatever you like, it doesn't matter.
+
+### That’s It
+
+All being well, this should be all that you need to rapidly serve static content files in your Zend Expressive application.
+
+[zendframework/zend-component-installer]: https://github.com/zendframework/zend-component-installer
