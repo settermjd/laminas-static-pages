@@ -38,18 +38,4 @@ class ConfigProvider
             ],
         ];
     }
-
-    /**
-     * Returns the templates configuration
-     *
-     * @return array
-     */
-    public function getTemplates()
-    {
-        return [
-            'paths' => [
-                'static-pages'    => [__DIR__ . '/../templates/static-pages'],
-            ],
-        ];
-    }
 }
