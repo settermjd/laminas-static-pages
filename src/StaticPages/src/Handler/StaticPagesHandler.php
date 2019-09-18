@@ -17,6 +17,7 @@ use Zend\Expressive\Template\TemplateRendererInterface;
 
 class StaticPagesHandler implements RequestHandlerInterface
 {
+    const ROUTE_NAME_PREFIX = 'static.';
     const TEMPLATE_NS = 'static-pages';
 
     /**
@@ -54,8 +55,25 @@ class StaticPagesHandler implements RequestHandlerInterface
             throw new InvalidArgumentException('Route has no name set');
         }
 
-        $templateName = sprintf('%s::%s', self::TEMPLATE_NS, substr($routeName, strrpos($routeName, '.') + 1));
+        $templateName = sprintf('%s::%s', self::TEMPLATE_NS, $this->getRouteName($routeName));
 
         return new HtmlResponse($this->template->render($templateName));
+    }
+
+    /**
+     * @param string $routeName
+     * @return bool|string
+     */
+    public function getRouteName(string $routeName) : string
+    {
+        if (substr($routeName, 0, 7) !== self::ROUTE_NAME_PREFIX) {
+            throw new InvalidArgumentException("Route's name does not match the expected format.");
+        }
+
+        if ((substr($routeName, 7)) === '') {
+            throw new InvalidArgumentException("Route's name does not match the expected format.");
+        }
+
+        return substr($routeName, 7);
     }
 }
