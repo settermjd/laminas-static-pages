@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace StaticPages\Handler;
 
-use Interop\Http\ServerMiddleware\DelegateInterface;
-use Interop\Http\ServerMiddleware\MiddlewareInterface as ServerMiddlewareInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -43,12 +41,11 @@ class StaticPagesHandler implements RequestHandlerInterface
 
     /**
      * @param ServerRequestInterface $request
-     * @param DelegateInterface $delegate
      * @return HtmlResponse
      */
     public function handle(ServerRequestInterface $request) : ResponseInterface
     {
-        /** @var RouteResult $routeName */
+        /** @var string $routeName */
         $routeName = ($request->getAttribute(RouteResult::class))->getMatchedRouteName();
 
         if ($routeName === false) {

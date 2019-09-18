@@ -7,7 +7,6 @@ namespace StaticPages\Test\Handler;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Prophecy\ObjectProphecy;
 use Psr\Container\ContainerInterface;
-use Prophecy\Argument;
 use Psr\Http\Message\ServerRequestInterface;
 use StaticPages\Handler\StaticPagesHandler;
 use Zend\Diactoros\Response\HtmlResponse;
