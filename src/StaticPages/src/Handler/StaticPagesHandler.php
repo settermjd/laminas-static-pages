@@ -13,7 +13,7 @@ use Zend\Expressive\Router\RouteResult;
 use Zend\Expressive\Router\RouterInterface;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
-class StaticPagesHandler implements RequestHandlerInterface
+final class StaticPagesHandler implements RequestHandlerInterface
 {
     const ROUTE_NAME_PREFIX = 'static.';
     const TEMPLATE_NS = 'static-pages';
