@@ -46,5 +46,10 @@
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml",
         "upload-coverage": "coveralls -v"
+    },
+    "extra": {
+        "zf": {
+            "config-provider": "StaticPages\\ConfigProvider"
+        }
     }
 }
