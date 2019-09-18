@@ -15,7 +15,7 @@ use Zend\Expressive\Router\RouteResult;
 use Zend\Expressive\Router\RouterInterface;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
-class StaticPagesHandlerTest extends TestCase
+final class StaticPagesHandlerTest extends TestCase
 {
     /** @var ContainerInterface|ObjectProphecy */
     protected $container;
