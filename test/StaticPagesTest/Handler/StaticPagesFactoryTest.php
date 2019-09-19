@@ -7,7 +7,7 @@ namespace StaticPages\Test\Handler;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Prophecy\ObjectProphecy;
 use Psr\Container\ContainerInterface;
-use StaticPages\Handler\StaticPagesFactory;
+use StaticPages\Handler\StaticPagesHandlerFactory;
 use StaticPages\Handler\StaticPagesHandler;
 use Zend\Expressive\Exception\MissingDependencyException;
 use Zend\Expressive\Router\RouterInterface;
@@ -35,7 +35,7 @@ class StaticPagesFactoryTest extends TestCase
             ->get(TemplateRendererInterface::class)
             ->willReturn($templateInterface);
 
-        $factory = new StaticPagesFactory();
+        $factory = new StaticPagesHandlerFactory();
 
         $page = $factory($this->container->reveal());
 
@@ -48,7 +48,7 @@ class StaticPagesFactoryTest extends TestCase
         $this->expectExceptionMessage("RouterInterface object not found in the container");
         $this->container->has(RouterInterface::class)->willReturn(false);
 
-        $factory = new StaticPagesFactory();
+        $factory = new StaticPagesHandlerFactory();
 
         $page = $factory($this->container->reveal());
 
@@ -65,7 +65,7 @@ class StaticPagesFactoryTest extends TestCase
         $this->container->get(RouterInterface::class)->willReturn($router);
         $this->container->has(TemplateRendererInterface::class)->willReturn(false);
 
-        $factory = new StaticPagesFactory();
+        $factory = new StaticPagesHandlerFactory();
 
         $page = $factory($this->container->reveal());
 
