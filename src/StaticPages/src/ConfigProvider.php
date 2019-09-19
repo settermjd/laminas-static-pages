@@ -34,7 +34,7 @@ class ConfigProvider
     {
         return [
             'factories'  => [
-                Handler\StaticPagesHandler::class => Handler\StaticPagesFactory::class,
+                Handler\StaticPagesHandler::class => Handler\StaticPagesHandlerFactory::class,
             ],
         ];
     }
