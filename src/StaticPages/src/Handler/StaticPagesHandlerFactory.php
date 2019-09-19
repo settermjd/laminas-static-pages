@@ -10,7 +10,7 @@ use Zend\Expressive\Exception\MissingDependencyException;
 use Zend\Expressive\Router\RouterInterface;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
-class StaticPagesFactory
+class StaticPagesHandlerFactory
 {
     public function __invoke(ContainerInterface $container) : RequestHandlerInterface
     {
