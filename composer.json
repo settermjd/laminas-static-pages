@@ -12,7 +12,7 @@
         "static pages"
     ],
     "require": {
-        "php": "^7.1",
+        "php": "^7.3",
         "zendframework/zend-config-aggregator": "^1.0",
         "zendframework/zend-diactoros": "^1.7.1 || ^2.0",
         "zendframework/zend-expressive": "^3.0.1",
