@@ -32,7 +32,7 @@ class ConfigProvider
     public function getDependencies()
     {
         return [
-            'factories'  => [
+            'factories' => [
                 Handler\StaticPagesHandler::class => Handler\StaticPagesHandlerFactory::class,
             ],
         ];
