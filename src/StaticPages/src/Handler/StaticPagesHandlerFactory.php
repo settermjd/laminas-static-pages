@@ -28,7 +28,7 @@ class StaticPagesHandlerFactory
     public function getRouter(ContainerInterface $container) : RouterInterface
     {
         if ($container->has(RouterInterface::class)) {
-           return $container->get(RouterInterface::class);
+            return $container->get(RouterInterface::class);
         }
 
         throw new MissingDependencyException("RouterInterface object not found in the container");

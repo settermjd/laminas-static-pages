@@ -31,7 +31,7 @@ final class StaticPagesHandler implements RequestHandlerInterface
     /**
      * StaticPagesHandler constructor.
      * @param RouterInterface $router
-     * @param TemplateRendererInterface|null $template
+     * @param TemplateRendererInterface $template
      */
     public function __construct(RouterInterface $router, TemplateRendererInterface $template)
     {
@@ -45,7 +45,7 @@ final class StaticPagesHandler implements RequestHandlerInterface
      */
     public function handle(ServerRequestInterface $request) : ResponseInterface
     {
-        /** @var string $routeName */
+        /** @var string|false $routeName */
         $routeName = ($request->getAttribute(RouteResult::class))->getMatchedRouteName();
 
         if ($routeName === false) {
@@ -59,7 +59,7 @@ final class StaticPagesHandler implements RequestHandlerInterface
 
     /**
      * @param string $routeName
-     * @return bool|string
+     * @return string
      */
     public function getRouteName(string $routeName) : string
     {
