@@ -31,7 +31,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Settermjd\\StaticPages\\": "src/StaticPages/src/"
+            "Settermjd\\StaticPages\\": "src/StaticPages/"
         }
     },
     "autoload-dev": {
