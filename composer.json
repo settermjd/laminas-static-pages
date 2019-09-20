@@ -48,7 +48,8 @@
         "cs-fix": "phpcbf",
         "phpstan": "phpstan analyze -l max -c phpstan.neon ./src",
         "test": "phpunit --colors=always",
-        "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
+        "test-coverage": "phpunit --colors=always --coverage-clover clover.xml",
+        "test-coverage-html": "phpunit --colors=always --coverage-html coverage"
     },
     "suggest": {
         "zendframework/zend-component-installer": "^2.0 for auto-enabling modules"
