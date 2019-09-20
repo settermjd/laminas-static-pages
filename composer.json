@@ -31,12 +31,12 @@
     },
     "autoload": {
         "psr-4": {
-            "StaticPages\\": "src/StaticPages/src/"
+            "Settermjd\\StaticPages\\": "src/StaticPages/src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "StaticPages\\Test\\": "test/StaticPagesTest/"
+            "Settermjd\\StaticPages\\Test\\": "test/StaticPagesTest/"
         }
     },
     "scripts": {

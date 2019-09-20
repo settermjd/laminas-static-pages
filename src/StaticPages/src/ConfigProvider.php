@@ -1,6 +1,6 @@
 <?php
 
-namespace StaticPages;
+namespace Settermjd\StaticPages;
 
 /**
  * The configuration provider for the StaticPages module
