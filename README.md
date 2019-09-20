@@ -59,7 +59,7 @@ In that case we'd add the following to `config/routes.php`:
 $app->get('/privacy', StaticPagesHandler::class, 'static.privacy');
 ```
 
-### Create Template Files
+### Create Template Files
 
 The file can contain whatever you like, it doesn't matter.
 
