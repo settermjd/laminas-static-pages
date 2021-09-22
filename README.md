@@ -1,8 +1,8 @@
-# Zend Expressive Static Pages Module
+# Laminas Static Pages Module
 
 An, almost, painless way to render static pages in Zend Expressive applications.
 
-**Note:** This module **does not** support (at least not yet) Zend Framework (MVC) applications.
+**Note:** This module **does not** support laminas-mvc applications.
 
 The intent of this package is to avoid the necessity to create handlers and handler factories just to render static content.
 It was motivated by various projects that I've worked on, where that seemed to be the case, at least at the time.
@@ -10,13 +10,13 @@ That approach never made sense to me, so that's that motivated me to scratch my 
 
 ## Getting Started
 
-To install the package, run `composer require settermjd/zend-expressive-static-pages`.
+To install the package, run `composer require settermjd/laminas-static-pages`.
 
-If you want to automate the enabling of the module when running `composer require/install/update`, then your project needs to use [zendframework/zend-component-installer].
+If you want to automate the enabling of the module when running `composer require/install/update`, then your project needs to use [laminas/laminas-component-installer].
 If it does, when the package is installed you'll be asked if you want to enable its ConfigProvider.
 Answer with `Y` and the package will be ready to use.
 
-If you don't use `zend-component-installer`, or for some reason or other can't, then ensure that `\StaticPages\ConfigProvider::class,` is in the `ConfigAggregator` list in `config/config.php`, as in the example below.
+If you don't use `laminas-component-installer`, or for some reason or other can't, then ensure that `\StaticPages\ConfigProvider::class,` is in the `ConfigAggregator` list in `config/config.php`, as in the example below.
 
 ```php
 $aggregator = new ConfigAggregator([
@@ -67,4 +67,4 @@ The file can contain whatever you like, it doesn't matter.
 
 All being well, this should be all that you need to rapidly serve static content files in your Zend Expressive application.
 
-[zendframework/zend-component-installer]: https://github.com/zendframework/zend-component-installer
+[laminas/laminas-component-installer]: https://github.com/laminas/laminas-component-installer
