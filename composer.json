@@ -59,8 +59,9 @@
         "issues": "https://github.com/settermjd/laminas-static-pages/issues"
     },
     "extra": {
-        "zf": {
-            "config-provider": "StaticPages\\ConfigProvider"
+        "laminas": {
+            "component": "Settermjd\\LaminasStaticPages",
+            "config-provider": "Settermjd\\StaticPages\\ConfigProvider"
         }
     }
 }
