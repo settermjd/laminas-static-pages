@@ -4,53 +4,65 @@ declare(strict_types=1);
 
 namespace Settermjd\StaticPages\Test\Handler;
 
+use Laminas\Diactoros\Response\HtmlResponse;
+use Mezzio\Exception\InvalidArgumentException;
+use Mezzio\Router\RouteResult;
+use Mezzio\Router\RouterInterface;
+use Mezzio\Template\TemplateRendererInterface;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Settermjd\StaticPages\Handler\StaticPagesHandler;
-use Zend\Diactoros\Response\HtmlResponse;
-use Zend\Expressive\Exception\InvalidArgumentException;
-use Zend\Expressive\Router\RouteResult;
-use Zend\Expressive\Router\RouterInterface;
-use Zend\Expressive\Template\TemplateRendererInterface;
 
 final class StaticPagesHandlerTest extends TestCase
 {
+    use ProphecyTrait;
+
     /** @var ContainerInterface|ObjectProphecy */
     protected $container;
 
     /** @var RouterInterface|ObjectProphecy */
     protected $router;
 
-    protected function setUp()
+    /** @var TemplateRendererInterface|ObjectProphecy $renderer */
+    private $renderer;
+
+    /** @var ServerRequestInterface|ObjectProphecy $request */
+    private $request;
+
+    /** @var RouteResult|ObjectProphecy $routerResult */
+    private $routeResult;
+
+    protected function setUp(): void
     {
         $this->container = $this->prophesize(ContainerInterface::class);
-        $this->router    = $this->prophesize(RouterInterface::class);
+        $this->router = $this->prophesize(RouterInterface::class);
+        $this->renderer = $this->prophesize(TemplateRendererInterface::class);
+        $this->request = $this->prophesize(ServerRequestInterface::class);
+        $this->routeResult = $this->prophesize(RouteResult::class);
     }
 
     public function testReturnsHtmlResponseWhenRequestedRouteIsNamedCorrectly()
     {
-        $renderer = $this->prophesize(TemplateRendererInterface::class);
-        $renderer
+        $this->renderer
             ->render('static-pages::terms')
             ->willReturn('');
 
         $page = new StaticPagesHandler(
             $this->router->reveal(),
-            $renderer->reveal()
+            $this->renderer->reveal()
         );
 
-        /** @var RouteResult|ObjectProphecy $routerResult */
-        $routerResult = $this->prophesize(RouteResult::class);
-        $routerResult->getMatchedRouteName()
+        $this->routeResult->getMatchedRouteName()
             ->willReturn('static.terms');
 
-        $request = $this->prophesize(ServerRequestInterface::class);
-        $request
+        $this->request
             ->getAttribute(RouteResult::class)
-            ->willReturn($routerResult);
-        $response = $page->handle($request->reveal());
+            ->willReturn($this->routeResult->reveal());
+
+        $response = $page->handle($this->request->reveal());
 
         $this->assertInstanceOf(HtmlResponse::class, $response);
     }
@@ -60,26 +72,23 @@ final class StaticPagesHandlerTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage("Route has no name set");
 
-        $renderer = $this->prophesize(TemplateRendererInterface::class);
-        $renderer
+        $this->renderer
             ->render('static-pages::terms')
             ->willReturn('');
 
         $page = new StaticPagesHandler(
             $this->router->reveal(),
-            $renderer->reveal()
+            $this->renderer->reveal()
         );
 
-        /** @var RouteResult|ObjectProphecy $routerResult */
-        $routerResult = $this->prophesize(RouteResult::class);
-        $routerResult->getMatchedRouteName()
+        $this->routeResult->getMatchedRouteName()
             ->willReturn(false);
 
-        $request = $this->prophesize(ServerRequestInterface::class);
-        $request
+        $this->request
             ->getAttribute(RouteResult::class)
-            ->willReturn($routerResult);
-        $page->handle($request->reveal());
+            ->willReturn($this->routeResult->reveal());
+
+        $page->handle($this->request->reveal());
     }
 
     /**
@@ -90,31 +99,27 @@ final class StaticPagesHandlerTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage("Route's name does not match the expected format.");
 
-        $renderer = $this->prophesize(TemplateRendererInterface::class);
-        $renderer
+        $this->renderer
             ->render('static-pages::terms')
             ->willReturn('');
 
-        $router = $this->prophesize(RouterInterface::class);
-
         $page = new StaticPagesHandler(
-            $router->reveal(),
-            $renderer->reveal()
+            $this->router->reveal(),
+            $this->renderer->reveal()
         );
 
-        /** @var RouteResult|ObjectProphecy $routerResult */
-        $routerResult = $this->prophesize(RouteResult::class);
-        $routerResult->getMatchedRouteName()
+        $this->routeResult
+            ->getMatchedRouteName()
             ->willReturn($routeName);
 
-        $request = $this->prophesize(ServerRequestInterface::class);
-        $request
+        $this->request
             ->getAttribute(RouteResult::class)
-            ->willReturn($routerResult);
-        $page->handle($request->reveal());
+            ->willReturn($this->routeResult->reveal());
+
+        $page->handle($this->request->reveal());
     }
 
-    public function invalidRouteNameDataProvider()
+    public function invalidRouteNameDataProvider(): array
     {
         return [
             [
