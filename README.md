@@ -1,6 +1,6 @@
 # Laminas Static Pages Module
 
-An, almost, painless way to render static pages in Zend Expressive applications.
+An, almost, painless way to render static pages in Mezzio applications.
 
 **Note:** This module **does not** support laminas-mvc applications.
 
