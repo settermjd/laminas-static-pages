@@ -1,6 +1,6 @@
 # Laminas Static Pages Module
 
-An, almost, painless way to render static pages in Mezzio applications.
+An, almost, painless way to render static pages in [Mezzio](https://docs.mezzio.dev/mezzio/) applications.
 
 **Note:** This module **does not** support laminas-mvc applications.
 
@@ -65,6 +65,6 @@ The file can contain whatever you like, it doesn't matter.
 
 ### That’s It
 
-All being well, this should be all that you need to rapidly serve static content files in your Zend Expressive application.
+All being well, this should be all that you need to rapidly serve static content files in your [Mezzio](https://docs.mezzio.dev/mezzio/) applications.
 
 [laminas/laminas-component-installer]: https://github.com/laminas/laminas-component-installer
