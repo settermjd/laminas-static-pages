@@ -68,3 +68,7 @@ The file can contain whatever you like, it doesn't matter.
 All being well, this should be all that you need to rapidly serve static content files in your [Mezzio](https://docs.mezzio.dev/mezzio/) applications.
 
 [laminas/laminas-component-installer]: https://github.com/laminas/laminas-component-installer
+
+## Support
+
+- [Issues](https://github.com/settermjd/laminas-static-pages/issues)
