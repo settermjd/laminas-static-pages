@@ -27,7 +27,9 @@
         "squizlabs/php_codesniffer": "^2.9.2",
         "zendframework/zend-coding-standard": "^1.0",
         "laminas/laminas-development-mode": "^3.3.0",
-        "phpspec/prophecy-phpunit": "^2.0"
+        "phpspec/prophecy-phpunit": "^2.0",
+        "vimeo/psalm": "^5.9",
+        "psalm/plugin-phpunit": "^0.18.4"
     },
     "autoload": {
         "psr-4": {
@@ -47,6 +49,7 @@
         "cs-check": "phpcs",
         "cs-fix": "phpcbf",
         "phpstan": "phpstan analyze -l max -c phpstan.neon ./src",
+        "static-analysis": "psalm --shepherd --stats",
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml",
         "test-coverage-html": "phpunit --colors=always --coverage-html coverage"
