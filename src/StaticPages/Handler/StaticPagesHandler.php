@@ -29,8 +29,9 @@ final class StaticPagesHandler implements RequestHandlerInterface
 
     public function handle(ServerRequestInterface $request) : ResponseInterface
     {
-        /** @var string|false $routeName */
-        $routeName = ($request->getAttribute(RouteResult::class))->getMatchedRouteName();
+        /** @var RouteResult $routeResult */
+        $routeResult = $request->getAttribute(RouteResult::class);
+        $routeName = $routeResult->getMatchedRouteName();
 
         if ($routeName === false) {
             throw new InvalidArgumentException('Route has no name set');
