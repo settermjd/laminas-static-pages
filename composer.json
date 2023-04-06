@@ -22,12 +22,11 @@
         "filp/whoops": "^2.5.0",
         "phpstan/phpstan": "^0.12",
         "phpstan/phpstan-strict-rules": "^0.12",
-        "phpunit/phpunit": "^9.5",
+        "phpunit/phpunit": "^10.0.19",
         "roave/security-advisories": "dev-master",
-        "squizlabs/php_codesniffer": "^2.9.2",
-        "zendframework/zend-coding-standard": "^1.0",
+        "squizlabs/php_codesniffer": "^3.7.2",
+        "laminas/laminas-coding-standard": "~2.5.0",
         "laminas/laminas-development-mode": "^3.3.0",
-        "phpspec/prophecy-phpunit": "^2.0",
         "vimeo/psalm": "^5.9",
         "psalm/plugin-phpunit": "^0.18.4"
     },
@@ -65,6 +64,11 @@
         "laminas": {
             "component": "Settermjd\\LaminasStaticPages",
             "config-provider": "Settermjd\\StaticPages\\ConfigProvider"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
         }
     }
 }
