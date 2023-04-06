@@ -7,6 +7,7 @@ namespace Settermjd\StaticPages\Test\Handler;
 use Mezzio\Exception\MissingDependencyException;
 use Mezzio\Router\RouterInterface;
 use Mezzio\Template\TemplateRendererInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
@@ -18,59 +19,65 @@ class StaticPagesFactoryTest extends TestCase
 {
     use ProphecyTrait;
 
-    /** @var ContainerInterface|ObjectProphecy */
+    /** @var MockObject&ContainerInterface  */
     protected $container;
 
     protected function setUp(): void
     {
-        $this->container = $this->prophesize(ContainerInterface::class);
+        $this->container = $this->createMock(ContainerInterface::class);
     }
 
-    public function testFactoryWithRouteAndTemplate()
+    public function testFactoryWithRouteAndTemplate(): void
     {
-        $router = $this->prophesize(RouterInterface::class);
-        $this->container->has(RouterInterface::class)->willReturn(true);
-        $this->container->get(RouterInterface::class)->willReturn($router);
+        $router = $this->createMock(RouterInterface::class);
+        $templateInterface = $this->createMock(TemplateRendererInterface::class);
 
-        $this->container->has(TemplateRendererInterface::class)->willReturn(true);
-        $templateInterface = $this->prophesize(TemplateRendererInterface::class);
         $this->container
-            ->get(TemplateRendererInterface::class)
-            ->willReturn($templateInterface);
+            ->method('has')
+            ->willReturnOnConsecutiveCalls(true, true);
+        $this->container
+            ->method('get')
+            ->willReturnOnConsecutiveCalls($router, $templateInterface);
 
         $factory = new StaticPagesHandlerFactory();
 
-        $page = $factory($this->container->reveal());
+        $page = $factory($this->container);
 
         $this->assertInstanceOf(StaticPagesHandler::class, $page);
     }
 
-    public function testFactoryWithoutRoute()
+    public function testFactoryWithoutRoute(): void
     {
         $this->expectException(MissingDependencyException::class);
         $this->expectExceptionMessage("RouterInterface object not found in the container");
-        $this->container->has(RouterInterface::class)->willReturn(false);
+        $this->container
+            ->method('has')
+            ->with(RouterInterface::class)
+            ->willReturn(false);
 
         $factory = new StaticPagesHandlerFactory();
 
-        $page = $factory($this->container->reveal());
+        $page = $factory($this->container);
 
         $this->assertInstanceOf(StaticPagesHandler::class, $page);
     }
 
-    public function testFactoryWithRouteButWithoutTemplate()
+    public function testFactoryWithRouteButWithoutTemplate(): void
     {
         $this->expectException(MissingDependencyException::class);
         $this->expectExceptionMessage("TemplateRendererInterface object not found in the container");
 
-        $router = $this->prophesize(RouterInterface::class);
-        $this->container->has(RouterInterface::class)->willReturn(true);
-        $this->container->get(RouterInterface::class)->willReturn($router);
-        $this->container->has(TemplateRendererInterface::class)->willReturn(false);
+        $router = $this->createMock(RouterInterface::class);
+        $this->container
+            ->method('get')
+            ->willReturn($router);
+        $this->container
+            ->method('has')
+            ->willReturnOnConsecutiveCalls(true, false);
 
         $factory = new StaticPagesHandlerFactory();
 
-        $page = $factory($this->container->reveal());
+        $page = $factory($this->container);
 
         $this->assertInstanceOf(StaticPagesHandler::class, $page);
     }
