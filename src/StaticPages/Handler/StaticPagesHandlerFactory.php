@@ -12,9 +12,9 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class StaticPagesHandlerFactory
 {
-    public function __invoke(ContainerInterface $container) : RequestHandlerInterface
+    public function __invoke(ContainerInterface $container): RequestHandlerInterface
     {
-        $router = $this->getRouter($container);
+        $router   = $this->getRouter($container);
         $template = $this->getTemplateRenderer($container);
 
         return new StaticPagesHandler($router, $template);
@@ -23,7 +23,7 @@ class StaticPagesHandlerFactory
     /**
      * @throws MissingDependencyException
      */
-    public function getRouter(ContainerInterface $container) : RouterInterface
+    public function getRouter(ContainerInterface $container): RouterInterface
     {
         if ($container->has(RouterInterface::class)) {
             return $container->get(RouterInterface::class);
@@ -35,7 +35,7 @@ class StaticPagesHandlerFactory
     /**
      * @throws MissingDependencyException
      */
-    public function getTemplateRenderer(ContainerInterface $container) : TemplateRendererInterface
+    public function getTemplateRenderer(ContainerInterface $container): TemplateRendererInterface
     {
         if ($container->has(TemplateRendererInterface::class)) {
             return $container->get(TemplateRendererInterface::class);

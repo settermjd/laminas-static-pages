@@ -11,16 +11,12 @@ use Mezzio\Router\RouterInterface;
 use Mezzio\Template\TemplateRendererInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ObjectProphecy;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Settermjd\StaticPages\Handler\StaticPagesHandler;
 
 class StaticPagesHandlerTest extends TestCase
 {
-    use ProphecyTrait;
-
     /** @var MockObject&ContainerInterface  */
     private $container;
 
@@ -38,10 +34,10 @@ class StaticPagesHandlerTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->container = $this->createMock(ContainerInterface::class);
-        $this->router = $this->createMock(RouterInterface::class);
-        $this->renderer = $this->createMock(TemplateRendererInterface::class);
-        $this->request = $this->createMock(ServerRequestInterface::class);
+        $this->container   = $this->createMock(ContainerInterface::class);
+        $this->router      = $this->createMock(RouterInterface::class);
+        $this->renderer    = $this->createMock(TemplateRendererInterface::class);
+        $this->request     = $this->createMock(ServerRequestInterface::class);
         $this->routeResult = $this->createMock(RouteResult::class);
     }
 
@@ -101,7 +97,7 @@ class StaticPagesHandlerTest extends TestCase
     /**
      * @dataProvider invalidRouteNameDataProvider
      */
-    public function testThrowsExceptionWhenTheNameOfTheRequestedRouteDoesNotMatchTheExpectedFormat(string $routeName): void
+    public function testThrowsExceptionWhenTheRequestedRouteNameDoesNotMatchTheExpectedFormat(string $routeName): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage("Route's name does not match the expected format.");
@@ -131,23 +127,23 @@ class StaticPagesHandlerTest extends TestCase
     /**
      * @return array<array<int,string>>
      */
-    public function invalidRouteNameDataProvider(): array
+    public static function invalidRouteNameDataProvider(): array
     {
         return [
             [
-                'terms'
+                'terms',
             ],
             [
-                'shonky.terms'
+                'shonky.terms',
             ],
             [
-                'static.'
+                'static.',
             ],
             [
-                '.terms'
+                '.terms',
             ],
             [
-                'static_terms'
+                'static_terms',
             ],
         ];
     }
