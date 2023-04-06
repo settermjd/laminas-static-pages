@@ -1,6 +1,6 @@
 # Laminas Static Pages Module
 
-![testing workflow](https://github.com/settermjd/laminas-static-pages/actions/workflows/main.yml/badge.svg)
+![testing workflow](https://github.com/settermjd/laminas-static-pages/actions/workflows/continuous-integration.yml/badge.svg)
 
 An, almost, painless way to render static pages in [Mezzio](https://docs.mezzio.dev/mezzio/) applications.
 
