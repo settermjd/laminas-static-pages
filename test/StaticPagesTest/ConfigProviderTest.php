@@ -12,29 +12,28 @@ use Settermjd\StaticPages\Handler\StaticPagesHandlerFactory;
 /**
  * Class ConfigProviderTest
  * @package StaticPages\Test
- * @covers \StaticPages\ConfigProvider
+ * @covers \Settermjd\StaticPages\ConfigProvider
  */
 class ConfigProviderTest extends TestCase
 {
-    public function testCanGetDependencies()
+    public function testCanGetDependencies(): void
     {
         $provider = new ConfigProvider();
         $this->assertEquals(
-            $provider->getDependencies(),
             [
                 'factories' => [
                     StaticPagesHandler::class => StaticPagesHandlerFactory::class,
                 ]
-            ]
+            ],
+            $provider->getDependencies()
         );
     }
 
-    public function testReturnsTheExpectedConfiguration()
+    public function testReturnsTheExpectedConfiguration(): void
     {
         $provider = new ConfigProvider();
         $configuration = $provider();
 
-        $this->assertIsArray($configuration);
         $this->assertArrayHasKey('dependencies', $configuration);
     }
 }
