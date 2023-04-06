@@ -9,16 +9,12 @@ use Mezzio\Router\RouterInterface;
 use Mezzio\Template\TemplateRendererInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ObjectProphecy;
 use Psr\Container\ContainerInterface;
-use Settermjd\StaticPages\Handler\StaticPagesHandlerFactory;
 use Settermjd\StaticPages\Handler\StaticPagesHandler;
+use Settermjd\StaticPages\Handler\StaticPagesHandlerFactory;
 
 class StaticPagesFactoryTest extends TestCase
 {
-    use ProphecyTrait;
-
     /** @var MockObject&ContainerInterface  */
     protected $container;
 
@@ -29,7 +25,7 @@ class StaticPagesFactoryTest extends TestCase
 
     public function testFactoryWithRouteAndTemplate(): void
     {
-        $router = $this->createMock(RouterInterface::class);
+        $router            = $this->createMock(RouterInterface::class);
         $templateInterface = $this->createMock(TemplateRendererInterface::class);
 
         $this->container
