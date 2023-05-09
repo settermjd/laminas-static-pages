@@ -1,0 +1,8 @@
+/.phpcs-cache
+/.phpunit.cache/
+/clover.xml
+/docs/html/
+/mezzio-mkdoc-theme.tgz
+/mezzio-mkdoc-theme/
+/phpunit.xml
+/vendor/

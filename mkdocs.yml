@@ -1,0 +1,10 @@
+docs_dir: docs/book
+site_dir: docs/html
+nav:
+    - Home: index.md
+    - Introduction: v1/intro.md
+site_name: 'mezzio-static-pages'
+site_description: 'Static pages middleware for Mezzio and PSR-7 applications'
+repo_url: 'https://github.com/mezzio/mezzio-static-pages'
+extra:
+    project: Mezzio

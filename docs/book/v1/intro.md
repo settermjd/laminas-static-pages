@@ -1,0 +1,3 @@
+# mezzio-static-pages
+
+This component provides ...
