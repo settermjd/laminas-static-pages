@@ -27,9 +27,6 @@ final class StaticPagesHandler implements RequestHandlerInterface
         $this->template = $template;
     }
 
-    /**
-     * @return HtmlResponse
-     */
     public function handle(ServerRequestInterface $request) : ResponseInterface
     {
         /** @var string|false $routeName */

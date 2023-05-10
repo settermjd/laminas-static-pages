@@ -21,8 +21,6 @@ class StaticPagesHandlerFactory
     }
 
     /**
-     * @param ContainerInterface $container
-     * @return RouterInterface
      * @throws MissingDependencyException
      */
     public function getRouter(ContainerInterface $container) : RouterInterface
@@ -35,8 +33,6 @@ class StaticPagesHandlerFactory
     }
 
     /**
-     * @param ContainerInterface $container
-     * @return TemplateRendererInterface
      * @throws MissingDependencyException
      */
     public function getTemplateRenderer(ContainerInterface $container) : TemplateRendererInterface
