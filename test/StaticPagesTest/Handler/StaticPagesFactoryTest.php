@@ -4,21 +4,24 @@ declare(strict_types=1);
 
 namespace Settermjd\StaticPages\Test\Handler;
 
+use Mezzio\Exception\MissingDependencyException;
+use Mezzio\Router\RouterInterface;
+use Mezzio\Template\TemplateRendererInterface;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use Psr\Container\ContainerInterface;
 use Settermjd\StaticPages\Handler\StaticPagesHandlerFactory;
 use Settermjd\StaticPages\Handler\StaticPagesHandler;
-use Zend\Expressive\Exception\MissingDependencyException;
-use Zend\Expressive\Router\RouterInterface;
-use Zend\Expressive\Template\TemplateRendererInterface;
 
 class StaticPagesFactoryTest extends TestCase
 {
+    use ProphecyTrait;
+
     /** @var ContainerInterface|ObjectProphecy */
     protected $container;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->container = $this->prophesize(ContainerInterface::class);
     }

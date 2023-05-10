@@ -4,35 +4,23 @@ declare(strict_types=1);
 
 namespace Settermjd\StaticPages\Handler;
 
+use Laminas\Diactoros\Response\HtmlResponse;
+use Mezzio\Exception\InvalidArgumentException;
+use Mezzio\Router\RouteResult;
+use Mezzio\Router\RouterInterface;
+use Mezzio\Template\TemplateRendererInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Zend\Diactoros\Response\HtmlResponse;
-use Zend\Expressive\Exception\InvalidArgumentException;
-use Zend\Expressive\Router\RouteResult;
-use Zend\Expressive\Router\RouterInterface;
-use Zend\Expressive\Template\TemplateRendererInterface;
 
 final class StaticPagesHandler implements RequestHandlerInterface
 {
     const ROUTE_NAME_PREFIX = 'static.';
     const TEMPLATE_NS = 'static-pages';
 
-    /**
-     * @var RouterInterface
-     */
-    private $router;
+    private RouterInterface $router;
+    private TemplateRendererInterface $template;
 
-    /**
-     * @var TemplateRendererInterface
-     */
-    private $template;
-
-    /**
-     * StaticPagesHandler constructor.
-     * @param RouterInterface $router
-     * @param TemplateRendererInterface $template
-     */
     public function __construct(RouterInterface $router, TemplateRendererInterface $template)
     {
         $this->router   = $router;
@@ -40,7 +28,6 @@ final class StaticPagesHandler implements RequestHandlerInterface
     }
 
     /**
-     * @param ServerRequestInterface $request
      * @return HtmlResponse
      */
     public function handle(ServerRequestInterface $request) : ResponseInterface
@@ -57,10 +44,6 @@ final class StaticPagesHandler implements RequestHandlerInterface
         return new HtmlResponse($this->template->render($templateName));
     }
 
-    /**
-     * @param string $routeName
-     * @return string
-     */
     public function getRouteName(string $routeName) : string
     {
         if (substr($routeName, 0, 7) !== self::ROUTE_NAME_PREFIX) {

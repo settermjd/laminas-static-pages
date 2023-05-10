@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Settermjd\StaticPages\Handler;
 
+use Mezzio\Exception\MissingDependencyException;
+use Mezzio\Router\RouterInterface;
+use Mezzio\Template\TemplateRendererInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Zend\Expressive\Exception\MissingDependencyException;
-use Zend\Expressive\Router\RouterInterface;
-use Zend\Expressive\Template\TemplateRendererInterface;
 
 class StaticPagesHandlerFactory
 {
