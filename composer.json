@@ -1,77 +1,77 @@
 {
-    "name": "mezzio/mezzio-static-pages",
-    "description": "Static pages middleware for Mezzio and PSR-7 applications",
-    "license": "BSD-3-Clause",
-    "keywords": [
-        "laminas",
-        "mezzio",
-        "middleware",
-        "psr-7",
-        "psr-15",
-        "static pages",
-        "static content"
-    ],
-    "support": {
-        "docs": "https://docs.mezzio.dev/mezzio-static-pages/",
-        "issues": "https://github.com/mezzio/mezzio-static-pages/issues",
-        "source": "https://github.com/mezzio/mezzio-static-pages",
-        "rss": "https://github.com/mezzio/mezzio-static-pages/releases.atom",
-        "forum": "https://discourse.laminas.dev/"
-    },
-    "require": {
-        "php": "~8.1.0 || ~8.2.0",
-        "laminas/laminas-config-aggregator": "^1.6.0",
-        "laminas/laminas-diactoros": "^2.8.0",
-        "mezzio/mezzio": "^3.6.0",
-        "laminas/laminas-stdlib": "^3.6.0"
-    },
-    "require-dev": {
-        "filp/whoops": "^2.5.0",
-        "phpstan/phpstan": "^0.12",
-        "phpstan/phpstan-strict-rules": "^0.12",
-        "phpunit/phpunit": "^10.0.19",
-        "roave/security-advisories": "dev-master",
-        "squizlabs/php_codesniffer": "^3.7.2",
-        "laminas/laminas-coding-standard": "~2.5.0",
-        "laminas/laminas-development-mode": "^3.3.0",
-        "vimeo/psalm": "^5.9",
-        "psalm/plugin-phpunit": "^0.18.4"
-    },
-    "autoload": {
-        "psr-4": {
-            "Mezzio\\StaticPages\\": "src/StaticPages/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Mezzio\\StaticPages\\Test\\": "test/StaticPagesTest/"
-        }
-    },
-    "extra": {
-        "laminas": {
-            "component": "Mezzio\\StaticPages",
-            "config-provider": "Mezzio\\StaticPages\\ConfigProvider"
-        }
-    },
-    "config": {
-        "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": true
-        },
-        "sort-packages": true
-    },
-    "suggest": {
-        "laminas/laminas-component-installer": "^2.5 for auto-enabling modules"
-    },
-    "scripts": {
-        "check": [
-            "@cs-check",
-            "@test"
-        ],
-        "cs-check": "phpcs",
-        "cs-fix": "phpcbf",
-        "test": "phpunit --colors=always",
-        "static-analysis": "psalm --shepherd --stats",
-        "test-coverage": "phpunit --colors=always --coverage-clover clover.xml",
-        "upload-coverage": "coveralls -v"
+  "name": "mezzio/mezzio-static-pages",
+  "description": "Static pages middleware for Mezzio and PSR-7 applications",
+  "license": "BSD-3-Clause",
+  "keywords": [
+    "laminas",
+    "mezzio",
+    "middleware",
+    "psr-7",
+    "psr-15",
+    "static content",
+    "static pages"
+  ],
+  "support": {
+    "docs": "https://docs.mezzio.dev/mezzio-static-pages/",
+    "issues": "https://github.com/mezzio/mezzio-static-pages/issues",
+    "source": "https://github.com/mezzio/mezzio-static-pages",
+    "rss": "https://github.com/mezzio/mezzio-static-pages/releases.atom",
+    "forum": "https://discourse.laminas.dev/"
+  },
+  "require": {
+    "php": "~8.1.0 || ~8.2.0",
+    "laminas/laminas-config-aggregator": "^1.6.0",
+    "laminas/laminas-diactoros": "^2.8.0",
+    "mezzio/mezzio": "^3.6.0",
+    "laminas/laminas-stdlib": "^3.6.0"
+  },
+  "require-dev": {
+    "filp/whoops": "^2.5.0",
+    "phpstan/phpstan": "^0.12",
+    "phpstan/phpstan-strict-rules": "^0.12",
+    "phpunit/phpunit": "^10.0.19",
+    "roave/security-advisories": "dev-master",
+    "squizlabs/php_codesniffer": "^3.7.2",
+    "laminas/laminas-coding-standard": "~2.5.0",
+    "laminas/laminas-development-mode": "^3.3.0",
+    "vimeo/psalm": "^5.9",
+    "psalm/plugin-phpunit": "^0.18.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "Mezzio\\StaticPages\\": "src/StaticPages/"
     }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Mezzio\\StaticPages\\Test\\": "test/StaticPagesTest/"
+    }
+  },
+  "extra": {
+    "laminas": {
+      "component": "Mezzio\\StaticPages",
+      "config-provider": "Mezzio\\StaticPages\\ConfigProvider"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    },
+    "sort-packages": true
+  },
+  "suggest": {
+    "laminas/laminas-component-installer": "^2.5 for auto-enabling modules"
+  },
+  "scripts": {
+    "check": [
+      "@cs-check",
+      "@test"
+    ],
+    "cs-check": "phpcs",
+    "cs-fix": "phpcbf",
+    "test": "phpunit --colors=always",
+    "static-analysis": "psalm --shepherd --stats",
+    "test-coverage": "phpunit --colors=always --coverage-clover clover.xml",
+    "upload-coverage": "coveralls -v"
+  }
 }
