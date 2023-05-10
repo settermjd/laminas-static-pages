@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace StaticPages\Test\Handler;
+namespace Settermjd\StaticPages\Test\Handler;
 
 use PHPUnit\Framework\TestCase;
 use Prophecy\Prophecy\ObjectProphecy;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use StaticPages\Handler\StaticPagesHandler;
+use Settermjd\StaticPages\Handler\StaticPagesHandler;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Expressive\Exception\InvalidArgumentException;
 use Zend\Expressive\Router\RouteResult;

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace StaticPages\Test\Handler;
+namespace Settermjd\StaticPages\Test\Handler;
 
 use PHPUnit\Framework\TestCase;
 use Prophecy\Prophecy\ObjectProphecy;
 use Psr\Container\ContainerInterface;
-use StaticPages\Handler\StaticPagesHandlerFactory;
-use StaticPages\Handler\StaticPagesHandler;
+use Settermjd\StaticPages\Handler\StaticPagesHandlerFactory;
+use Settermjd\StaticPages\Handler\StaticPagesHandler;
 use Zend\Expressive\Exception\MissingDependencyException;
 use Zend\Expressive\Router\RouterInterface;
 use Zend\Expressive\Template\TemplateRendererInterface;

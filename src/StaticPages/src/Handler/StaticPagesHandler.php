@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace StaticPages\Handler;
+namespace Settermjd\StaticPages\Handler;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

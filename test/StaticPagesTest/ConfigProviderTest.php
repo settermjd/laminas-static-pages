@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace StaticPages\Test;
+namespace Settermjd\StaticPages\Test;
 
 use PHPUnit\Framework\TestCase;
-use StaticPages\ConfigProvider;
-use StaticPages\Handler\StaticPagesHandler;
-use StaticPages\Handler\StaticPagesHandlerFactory;
+use Settermjd\StaticPages\ConfigProvider;
+use Settermjd\StaticPages\Handler\StaticPagesHandler;
+use Settermjd\StaticPages\Handler\StaticPagesHandlerFactory;
 
 /**
  * Class ConfigProviderTest
